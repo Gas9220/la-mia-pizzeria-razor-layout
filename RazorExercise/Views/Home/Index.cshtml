@@ -1,8 +1,102 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Razor Exercise";
+
+    string firstName = "Gaspare";
+    string lastName = "Rossi";
+    string today = DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
+    string sevenDaysAgo = DateTime.Now.AddDays(-7).ToString("yyyy'-'MM'-'dd");
+    string weekDay = DateTime.Today.DayOfWeek.ToString();
+    string nextYearWeekDay = DateTime.Today.AddYears(1).DayOfWeek.ToString();
+
+    int sumNumbers(int n)
+    {
+        int sum = 0;
+
+        for (int i = 0; i <= n; i++)
+        {
+            sum += i;
+        }
+
+        return sum;
+    }
+
+    int countAOccurrences(string sentence)
+    {
+        int count = sentence.Count(a => a == 'a');
+
+        return count;
+    }
+
+    List<int> randomNumbers()
+    {
+        List<int> numbers = new List<int>();
+        Random rnd = new Random();
+        for (int i = 0; i < 20; i++)
+        {
+            int randomNumber = rnd.Next(1, 91);
+
+            if (randomNumber >= 20 && randomNumber <= 70)
+            {
+                numbers.Add(randomNumber);
+            }
+        }
+
+        return numbers;
+    }
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <ol class="list-group list-group-numbered">
+        <li class="list-group-item">
+            <h6>Dichiarare una variabile valorizzandola con il nostro nome.</h6>
+            <h6>Dichiarare un'altra variabile valorizzandola con il nostro cognome.</h6>
+            <h6>Stampare il nostro nome e cognome all'interno di un tag h2.</h6>
+            <h2>@firstName @lastName</h2>
+        </li>
+        <li class="list-group-item">
+            <h6>
+                Creare una funzione che stampa la somma dei numeri che vanno da 1 a n (con n passato come parametro - n incluso)
+                Stampare dentro uno span il risultato.
+            </h6>
+            <span>@sumNumbers(5)</span>
+        </li>
+        <li class="list-group-item">
+            <h6>
+                Contare quante volte la lettera a è presente nalla frase "nel mezzo del cammin di nostra vita" e stampare questo valore in pagina.
+            </h6>
+            <span>@countAOccurrences("nel mezzo del cammin di nostra vita")</span>
+        </li>
+        <li class="list-group-item">
+            <h6>
+                Creare una List<int> di 20 numeri interi (generati random da 1 a 90, 1 e 90 inclusi) e mostrare in pagina solo i numeri compresi tra 20 e 70.
+            </h6>
+            @foreach (int number in randomNumbers())
+            {
+                <span>@number</span>
+            }
+        </li>
+        <li class="list-group-item">
+            <h6>
+                Stampare in pagina la data e l'ora attuale (usando la classe DateTime) con il formato anno-mese-giorno ore:minuti:secondi.
+            </h6>
+            <span>@today</span>
+        </li>
+        <li class="list-group-item">
+            <h6>
+                Partendo dalla data di oggi (usando la classe DateTime) stampare in pagina.
+            </h6>
+            <h6>
+                a. la data di 7 giorni fa
+            </h6>
+            <h6>
+                b. che giorno della settimana è oggi (il risultato dovrà essere il nome del giorno (Lunedì, Martedì, ...)
+            </h6>
+            <h6>
+                c. che giorno della settimana sarà nello stesso giorno e mese di oggi ma tra un anno (il risultato dovrà essere il nome del giorno (Lunedì, Martedì, ...)
+            </h6>
+            <span class="d-block">a: @sevenDaysAgo</span>
+            <span class="d-block">b: @weekDay</span>
+            <span>c: @nextYearWeekDay</span>
+        </li>
+    </ol>
 </div>
