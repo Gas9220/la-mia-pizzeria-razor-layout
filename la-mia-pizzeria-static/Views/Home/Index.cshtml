@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Admin Dashboard";
     Layout = "_Layout";
+    var allPizzas = PizzaStore.GetAllPizzas();
 }
 
 <table class="table">
@@ -14,32 +15,17 @@
         </tr>
     </thead>
     <tbody>
+        @foreach (var pizza in allPizzas)
+        {
         <tr class="text-center align-middle">
-            <th scope="row" class="text-center">1</th>
+            <th scope="row" class="text-center">@pizza.Id</th>
             <td>
-                <img class="align-self-center" style="width: 60px; height:60px" src="~/img/margherita.png" />
+                    <img class="align-self-center" style="width: 60px; height:60px" src="@pizza.PhotoUrl" />
             </td>
-            <td>Margherita</td>
-            <td>Pomodoro, mozzarella</td>
-            <td>6€</td>
-        </tr>
-        <tr class="text-center align-middle">
-            <th scope="row" class="text-center">2</th>
-            <td>
-                <img class="align-self-center" style="width: 60px; height:60px" src="~/img/marinara.png" />
-            </td>
-            <td>Marinara</td>
-            <td>Pomodoro, origano, aglio</td>
-            <td>5€</td>
-        </tr>
-        <tr class="text-center align-middle">
-            <th scope="row" class="text-center">3</th>
-            <td>
-                <img class="align-self-center" style="width: 60px; height:60px" src="~/img/diavola.png" />
-            </td>
-            <td>Diavola</td>
-            <td>Pomodoro, mozzarella, salame piccante</td>
-            <td>8€</td>
-        </tr>
+            <td>@pizza.Name</td>
+            <td>@pizza.Description</td>
+            <td>@pizza.Price €</td>
+        </tr>   
+        }
     </tbody>
 </table>
